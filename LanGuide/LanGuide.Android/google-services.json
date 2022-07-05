@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "910603451090",
+    "project_id": "languide-21389",
+    "storage_bucket": "languide-21389.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910603451090:android:6a7490b6f823f1a2ffcb0b",
+        "android_client_info": {
+          "package_name": "com.companyname.languide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910603451090-8l2o90tg7cu3kdotkbibhd7n3uampdb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDct_nPvd8-FQwP990H8xUixiLu8b6pA7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910603451090-8l2o90tg7cu3kdotkbibhd7n3uampdb2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LanGuide.HomePage">
+
+    <!--<StackLayout>
+        <Frame BackgroundColor="#029788" Padding="0" CornerRadius="0">
+            <Image Source="logo.png" HeightRequest="100" />
+        </Frame>
+        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
+        <Label FontSize="16" Padding="30,24,30,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Learn more at "/>
+                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </StackLayout>-->
+    
+    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical">
+        <Frame BackgroundColor="#029788" Padding="0" CornerRadius="0">
+            <Image Source="logo.png" HeightRequest="100" />
+        </Frame>
+        <Frame HorizontalOptions="FillAndExpand" Margin="20,20,20,10" HasShadow="True" Padding="0"  >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="UsersFrame_Tapped" NumberOfTapsRequired="1" />
+            </Frame.GestureRecognizers>
+            <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="0" Margin="0,0,0,0"  BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
+                    <Frame BackgroundColor="#029788" HasShadow="False">
+                        <Image  Source="users.png" WidthRequest="50" HeightRequest="50" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,0,0"  Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="USERS " TextColor="#222" FontSize = "20" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="List of all students who are using the apps" FontSize = "16"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Frame HorizontalOptions="FillAndExpand" Margin="20,10,20,10" HasShadow="True" Padding="0"  >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ResultsFrame_Tapped" NumberOfTapsRequired="1" />
+            </Frame.GestureRecognizers>
+            <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="0" Margin="0,0,0,0"  BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
+                    <Frame BackgroundColor="#029788" HasShadow="False">
+                        <Image  Source="results.png" WidthRequest="50" HeightRequest="50" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,0,0"  Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="RESULTS " TextColor="#222" FontSize = "20" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="List of all results in solving exercises" FontSize = "16"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Frame HorizontalOptions="FillAndExpand" Margin="20,10,20,10" HasShadow="True" Padding="0" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="LanguagesFrame_Tapped" NumberOfTapsRequired="1" />
+            </Frame.GestureRecognizers>
+            <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="0" Margin="0,0,0,0"  BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
+                    <Frame BackgroundColor="#029788" HasShadow="False">
+                        <Image  Source="languages.png" WidthRequest="50" HeightRequest="50" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,0,0"  Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="LANGUAGES " TextColor="#222" FontSize = "20" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="List of languages available on exercises" FontSize = "16"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Button x:Name="logoutButton" 
+                Text="Logout"
+                Margin="20"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Clicked="logoutButton_Clicked"/>
+    </StackLayout>
+</ContentPage>
