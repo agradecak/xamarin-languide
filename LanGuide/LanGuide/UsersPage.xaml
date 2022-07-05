@@ -2,11 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LanGuide.UsersPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ListView x:Name="userListView">
+        <ListView.Header>
+            <Grid BackgroundColor="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="User ID" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
+                <Label Text="E-mail" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
+                <Label Text="Time created" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="2" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </ListView.Header>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text ="{Binding id_user}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="1"></Label>
+                        <Label Grid.Column="1" Text ="{Binding email}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="1"></Label>
+                        <Label Grid.Column="2" Text ="{Binding create_time}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="1"></Label>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
