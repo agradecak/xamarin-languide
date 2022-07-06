@@ -17,16 +17,56 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="User ID" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="E-mail" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Time created" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="2" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Exercise ID" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="3" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Result percent" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="4" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Result score" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="5" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Result max" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="6" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Skill" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="7" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Language" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="8" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
-                <Label Text="Date" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="9" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center"/>
+                <Label Text="User ID" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortID_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="E-mail" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortEmail_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Time created" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="2" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortTime_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Exercise ID" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="3" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortExercise_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Result percent" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="4" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortResultPercent_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Result score" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="5" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortResultScore_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Result max" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="6" Padding="10" FontSize="Small" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortResultMax_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Skill" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="7" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortSkill_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Language" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="8" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortLanguage_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Date" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="9" Padding="10" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#029788" TextColor="White" HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="sortDate_Tapped" NumberOfTapsRequired="1"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </Grid>
         </ListView.Header>
 

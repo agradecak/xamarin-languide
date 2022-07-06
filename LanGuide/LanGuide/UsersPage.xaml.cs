@@ -16,6 +16,10 @@ namespace LanGuide
     public partial class UsersPage : ContentPage
     {
         List<User> users = new List<User>();
+        
+        bool sortIDAscending = true;
+        bool sortEmailAscending = true;
+        bool sortTimeAscending = true;
         public UsersPage()
         {
             InitializeComponent();
@@ -40,6 +44,53 @@ namespace LanGuide
                 }
             }
             userListView.ItemsSource = users;
+        }
+
+        private void sortID_Tapped(object sender, EventArgs e)
+        {
+            if (sortIDAscending)
+            {
+                List<User> sortedUsers = users.OrderByDescending(user => Convert.ToInt16(user.id_user)).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortIDAscending = false;
+            }
+            else
+            {
+                List<User> sortedUsers = users.OrderBy(user => Convert.ToInt16(user.id_user)).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortIDAscending = true;
+            }
+        }
+
+        private void sortEmail_Tapped(object sender, EventArgs e)
+        {
+            if (sortEmailAscending)
+            {
+                List<User> sortedUsers = users.OrderByDescending(user => user.email).ThenBy(usr => Convert.ToInt16(usr.id_user)).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortEmailAscending = false;
+            }
+            else
+            {
+                List<User> sortedUsers = users.OrderBy(user => user.email).ThenBy(usr => Convert.ToInt16(usr.id_user)).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortEmailAscending = true;
+            }
+        }
+        private void sortTime_Tapped(object sender, EventArgs e)
+        {
+            if (sortTimeAscending)
+            {
+                List<User> sortedUsers = users.OrderByDescending(user => user.create_time).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortTimeAscending = false;
+            }
+            else
+            {
+                List<User> sortedUsers = users.OrderBy(user => user.create_time).ToList();
+                userListView.ItemsSource = sortedUsers;
+                sortTimeAscending = true;
+            }
         }
     }
 }
