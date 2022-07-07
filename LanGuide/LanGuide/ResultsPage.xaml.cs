@@ -16,6 +16,8 @@ namespace LanGuide
     public partial class ResultsPage : ContentPage
     {
         List<Result> results = new List<Result>();
+        List<string> skillList = new List<string>();
+        List<string> languageList = new List<string>();
 
         bool sortIDAscending = true;
         bool sortEmailAscending = true;
@@ -55,9 +57,52 @@ namespace LanGuide
                     rslt.language = user["language"].ToString();
                     rslt.result_date = user["result_date"].ToString();
                     results.Add(rslt);
+                    skillList.Add(rslt.skill);
+                    languageList.Add(rslt.language);
                 }
             }
             resultListView.ItemsSource = results;
+            List<string> lanPickerList = languageList.Distinct().ToList();
+            List<string> skillPickerList = skillList.Distinct().ToList();
+            languagePicker.ItemsSource = lanPickerList;
+            skillPicker.ItemsSource = skillPickerList;
+        }
+        void dateCalc_Clicked(object sender, EventArgs e)
+        {
+            var pickedResults = results.Where(result => Convert.ToDateTime(result.result_date) >= startDatePicker.Date && Convert.ToDateTime(result.result_date) <= endDatePicker.Date).ToList();
+            resultListView.ItemsSource = pickedResults;
+        }
+        void userSearch_Changed(object sender, TextChangedEventArgs e)
+        {
+            var searchResults = results.Where(result => result.id_user.Equals(e.NewTextValue)).ToList();
+            resultListView.ItemsSource = searchResults;
+        }
+        void emailSearch_Changed(object sender, TextChangedEventArgs e)
+        {
+            var searchResults = results.Where(result => result.email.Equals(e.NewTextValue)).ToList();
+            resultListView.ItemsSource = searchResults;
+        }
+        void exerciseSearch_Changed(object sender, TextChangedEventArgs e)
+        {
+            var searchResults = results.Where(result => result.id_exercise.StartsWith(e.NewTextValue)).ToList();
+            resultListView.ItemsSource = searchResults;
+        }
+        void resetButton_Clicked(object sender, EventArgs e)
+        {
+            resultListView.ItemsSource = results;
+        }
+        public void languagePicker_Clicked(object sender, EventArgs e)
+        {
+            string pickedLanguage = languagePicker.SelectedItem as string;
+            var pickedResults = results.Where(result => result.language == pickedLanguage).ToList();
+            resultListView.ItemsSource = pickedResults;
+        }
+
+        public void skillPicker_Clicked(object sender, EventArgs e)
+        {
+            string pickedSkill = skillPicker.SelectedItem as string;
+            var pickedResults = results.Where(result => result.skill == pickedSkill).ToList();
+            resultListView.ItemsSource = pickedResults;
         }
 
         private void sortID_Tapped(object sender, EventArgs e)
