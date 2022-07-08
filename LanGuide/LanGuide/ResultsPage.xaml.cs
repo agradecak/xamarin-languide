@@ -104,7 +104,7 @@ namespace LanGuide
             }
         }
 
-        public async void languageGraphs_Clicked(object sender, EventArgs e)
+        public async void languageCharts_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new LanguageGraphsPage());
         }
@@ -124,7 +124,7 @@ namespace LanGuide
             }
         }
 
-        public async void skillGraphs_Clicked(object sender, EventArgs e)
+        public async void skillCharts_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SkillGraphsPage());
         }
@@ -142,6 +142,11 @@ namespace LanGuide
                 await App.Current.MainPage.DisplayAlert("Error", "Range not valid. 'Min' field value must be smaller than 'Max' field value.", "OK");
             }
         }
+        public async void resPercentCharts_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ResultPercentGraphsPage());
+        }
+
         public async void resScoreButton_Clicked(object sender, EventArgs e)
         {
             if (Convert.ToInt16(resScoreMinEntry.Text) < Convert.ToInt16(resScoreMaxEntry.Text))
@@ -184,7 +189,8 @@ namespace LanGuide
         }
         public void resetListButton_Clicked(object sender, EventArgs e)
         {
-            resultListView.ItemsSource = results;
+            var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user)).ThenBy(res => res.result_date);
+            resultListView.ItemsSource = sortedResults;
         }
         private void sortID_Tapped(object sender, EventArgs e)
         {

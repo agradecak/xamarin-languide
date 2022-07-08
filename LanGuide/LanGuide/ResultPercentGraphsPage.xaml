@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="LanGuide.ResultPercentGraphsPage">
+    <StackLayout BackgroundColor="White">
+        <ScrollView>
+            <StackLayout Padding="20">
+                <Frame Margin="0,0,0,15">
+                    <StackLayout>
+                        <Label Text="Bar chart" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10"/>
+                        <microcharts:ChartView x:Name="chartViewBar" HeightRequest="300"/>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Line chart" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10"/>
+                        <microcharts:ChartView x:Name="chartViewLine" HeightRequest="300"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
