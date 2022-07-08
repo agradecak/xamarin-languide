@@ -6,26 +6,24 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout >
-                <!--<Label Text="Search" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>-->
-                
+
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                     <SearchBar x:Name="IDSearchBox" Placeholder="User ID" WidthRequest="180" HorizontalOptions="Fill"  TextChanged="userSearch_Changed"/>
                     <SearchBar x:Name="EmailSearchBox" Placeholder="User email" WidthRequest="195" HorizontalOptions="Fill" TextChanged="emailSearch_Changed"/>
                 </StackLayout>
                 <SearchBar x:Name="ExerciseSearchBox" Placeholder="Exercise ID"  TextChanged="exerciseSearch_Changed" Margin="0,0,0,10"/>
-                
-                <!--<Label Text="Ranges" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>-->
-                
+
                 <StackLayout Orientation="Horizontal">
                     <Picker x:Name="languagePicker" Title="Language" HorizontalOptions="StartAndExpand" WidthRequest="190" Margin="10,0,0,0"/>
                     <Button Text="Filter" WidthRequest="80" HorizontalOptions="End" Clicked="languagePicker_Clicked"/>
-                    <Button Text="Graphs" WidthRequest="80" HorizontalOptions="End" Clicked="languageGraphs_Clicked" Margin="0,0,10,0"/>
+                    <Button Text="Charts" WidthRequest="80" HorizontalOptions="End" Clicked="languageGraphs_Clicked" Margin="0,0,10,0"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Picker x:Name="skillPicker" Title="Skill" HorizontalOptions="StartAndExpand" WidthRequest="190" Margin="10,0,0,0"/>
                     <Button Text="Filter" WidthRequest="80" HorizontalOptions="End" Clicked="skillPicker_Clicked"/>
-                    <Button Text="Graphs" WidthRequest="80" HorizontalOptions="End" Clicked="skillGraphs_Clicked" Margin="0,0,10,0"/>
+                    <Button Text="Charts" WidthRequest="80" HorizontalOptions="End" Clicked="skillGraphs_Clicked" Margin="0,0,10,0"/>
                 </StackLayout>
+                
                 <StackLayout Orientation="Horizontal">
                     <Entry x:Name="resPercentMinEntry" Placeholder="% min" HorizontalOptions="FillAndExpand" Margin="10,0,0,0"/>
                     <Entry x:Name="resPercentMaxEntry" Placeholder="% max" HorizontalOptions="FillAndExpand" Margin="10,0,0,0"/>
@@ -46,7 +44,9 @@
                     <DatePicker x:Name="endDatePicker" HorizontalOptions="FillAndExpand" Margin="10,0,0,0"/>
                     <Button Text="Date range" WidthRequest="110" HorizontalOptions="End" Clicked="dateCalc_Clicked" Margin="0,0,10,0"/>
                 </StackLayout>
+                
                 <Button Text="Reset list" HorizontalOptions="CenterAndExpand" Clicked="resetListButton_Clicked" Margin="0,10"/>
+                
                 <ScrollView Orientation="Horizontal">
                     <ListView x:Name="resultListView" WidthRequest="1000">
                         <ListView.Header>
