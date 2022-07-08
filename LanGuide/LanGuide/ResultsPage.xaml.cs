@@ -102,7 +102,7 @@ namespace LanGuide
             resultListView.ItemsSource = orderedResults;
         }
         
-        public void resPercentButton_Clicked(object sender, EventArgs e)
+        public async void resPercentButton_Clicked(object sender, EventArgs e)
         {
             if (Convert.ToInt16(resPercentMinEntry.Text) < Convert.ToInt16(resPercentMaxEntry.Text))
             {
@@ -110,8 +110,12 @@ namespace LanGuide
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Range not valid. 'Min' field value must be smaller than 'Max' field value.", "OK");
+            }
         }
-        public void resScoreButton_Clicked(object sender, EventArgs e)
+        public async void resScoreButton_Clicked(object sender, EventArgs e)
         {
             if (Convert.ToInt16(resScoreMinEntry.Text) < Convert.ToInt16(resScoreMaxEntry.Text))
             {
@@ -119,8 +123,12 @@ namespace LanGuide
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Range not valid. 'Min' field value must be smaller than 'Max' field value.", "OK");
+            }
         }
-        public void resMaxButton_Clicked(object sender, EventArgs e)
+        public async void resMaxButton_Clicked(object sender, EventArgs e)
         {
             if (Convert.ToInt16(resMaxMinEntry.Text) < Convert.ToInt16(resMaxMaxEntry.Text))
             {
@@ -128,15 +136,23 @@ namespace LanGuide
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Range not valid. 'Min' field value must be smaller than 'Max' field value.", "OK");
+            }
         }
 
-        public void dateCalc_Clicked(object sender, EventArgs e)
+        public async void dateCalc_Clicked(object sender, EventArgs e)
         {
             if (startDatePicker.Date < endDatePicker.Date)
             {
                 var filteredResults = results.Where(result => Convert.ToDateTime(result.result_date) >= startDatePicker.Date && Convert.ToDateTime(result.result_date) <= endDatePicker.Date);
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToDateTime(result.result_date));
                 resultListView.ItemsSource = orderedResults;
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Range not valid. Start date must come earlier than end date.", "OK");
             }
         }
         public void resetListButton_Clicked(object sender, EventArgs e)
@@ -147,13 +163,13 @@ namespace LanGuide
         {
             if (sortIDAscending)
             {
-                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.id_user));
+                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.id_user)).ThenBy(res => res.result_date);
                 resultListView.ItemsSource = sortedResults;
                 sortIDAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user));
+                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user)).ThenBy(res => res.result_date);
                 resultListView.ItemsSource = sortedResults;
                 sortIDAscending = true;
             }
