@@ -57,13 +57,15 @@ namespace LanGuide
                     rslt.language = user["language"].ToString();
                     rslt.result_date = user["result_date"].ToString();
                     results.Add(rslt);
-                    skillList.Add(rslt.skill);
-                    languageList.Add(rslt.language);
+                    if (rslt.skill != String.Empty)
+                        skillList.Add(rslt.skill);
+                    if (rslt.language != String.Empty)
+                        languageList.Add(rslt.language);
                 }
             }
             resultListView.ItemsSource = results;
-            var lanPickerList = languageList.Distinct().ToList();
-            var skillPickerList = skillList.Distinct().ToList();
+            var lanPickerList = languageList.Distinct().OrderBy(lang => lang).ToList();
+            var skillPickerList = skillList.Distinct().OrderBy(skill => skill).ToList();
             languagePicker.ItemsSource = lanPickerList;
             skillPicker.ItemsSource = skillPickerList;
         }
@@ -86,7 +88,7 @@ namespace LanGuide
         }
         public void languagePicker_Clicked(object sender, EventArgs e)
         {
-            string pickedLanguage = languagePicker.SelectedItem as string;
+            string pickedLanguage = languagePicker.SelectedItem.ToString();
             var pickedResults = results.Where(result => result.language == pickedLanguage);
             var orderedResults = pickedResults.OrderBy(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user));
             resultListView.ItemsSource = orderedResults;
@@ -94,7 +96,7 @@ namespace LanGuide
 
         public void skillPicker_Clicked(object sender, EventArgs e)
         {
-            string pickedSkill = skillPicker.SelectedItem as string;
+            string pickedSkill = skillPicker.SelectedItem.ToString();
             var pickedResults = results.Where(result => result.skill == pickedSkill);
             var orderedResults = pickedResults.OrderBy(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user));
             resultListView.ItemsSource = orderedResults;
@@ -104,7 +106,7 @@ namespace LanGuide
         {
             if (Convert.ToInt16(resPercentMinEntry.Text) < Convert.ToInt16(resPercentMaxEntry.Text))
             {
-                var filteredResults = results.Where(result => Convert.ToInt16(result.result_percent) >= Convert.ToInt16(resPercentMinEntry.Text) && Convert.ToInt16(result.result_percent) <= Convert.ToInt16(resPercentMaxEntry.Text)).ToList();
+                var filteredResults = results.Where(result => Convert.ToInt16(result.result_percent) >= Convert.ToInt16(resPercentMinEntry.Text) && Convert.ToInt16(result.result_percent) <= Convert.ToInt16(resPercentMaxEntry.Text));
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
@@ -113,7 +115,7 @@ namespace LanGuide
         {
             if (Convert.ToInt16(resScoreMinEntry.Text) < Convert.ToInt16(resScoreMaxEntry.Text))
             {
-                var filteredResults = results.Where(result => Convert.ToInt16(result.result_score) >= Convert.ToInt16(resScoreMinEntry.Text) && Convert.ToInt16(result.result_score) <= Convert.ToInt16(resScoreMaxEntry.Text)).ToList();
+                var filteredResults = results.Where(result => Convert.ToInt16(result.result_score) >= Convert.ToInt16(resScoreMinEntry.Text) && Convert.ToInt16(result.result_score) <= Convert.ToInt16(resScoreMaxEntry.Text));
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
@@ -122,7 +124,7 @@ namespace LanGuide
         {
             if (Convert.ToInt16(resMaxMinEntry.Text) < Convert.ToInt16(resMaxMaxEntry.Text))
             {
-                var filteredResults = results.Where(result => Convert.ToInt16(result.result_max) >= Convert.ToInt16(resMaxMinEntry.Text) && Convert.ToInt16(result.result_max) <= Convert.ToInt16(resMaxMaxEntry.Text)).ToList();
+                var filteredResults = results.Where(result => Convert.ToInt16(result.result_max) >= Convert.ToInt16(resMaxMinEntry.Text) && Convert.ToInt16(result.result_max) <= Convert.ToInt16(resMaxMaxEntry.Text));
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = orderedResults;
             }
@@ -132,7 +134,7 @@ namespace LanGuide
         {
             if (startDatePicker.Date < endDatePicker.Date)
             {
-                var filteredResults = results.Where(result => Convert.ToDateTime(result.result_date) >= startDatePicker.Date && Convert.ToDateTime(result.result_date) <= endDatePicker.Date).ToList();
+                var filteredResults = results.Where(result => Convert.ToDateTime(result.result_date) >= startDatePicker.Date && Convert.ToDateTime(result.result_date) <= endDatePicker.Date);
                 var orderedResults = filteredResults.OrderBy(result => Convert.ToDateTime(result.result_date));
                 resultListView.ItemsSource = orderedResults;
             }
@@ -145,13 +147,13 @@ namespace LanGuide
         {
             if (sortIDAscending)
             {
-                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortIDAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortIDAscending = true;
             }
@@ -161,13 +163,13 @@ namespace LanGuide
         {
             if (sortEmailAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.email).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => result.email).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortEmailAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.email).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => result.email).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortEmailAscending = true;
             }
@@ -176,13 +178,13 @@ namespace LanGuide
         {
             if (sortTimeAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.create_time).ToList();
+                var sortedResults = results.OrderByDescending(result => result.create_time);
                 resultListView.ItemsSource = sortedResults;
                 sortTimeAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.create_time).ToList();
+                var sortedResults = results.OrderBy(result => result.create_time);
                 resultListView.ItemsSource = sortedResults;
                 sortTimeAscending = true;
             }
@@ -191,13 +193,13 @@ namespace LanGuide
         {
             if (sortExerciseAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.id_exercise).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => result.id_exercise).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortExerciseAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.id_exercise).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => result.id_exercise).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortExerciseAscending = true;
             }
@@ -206,13 +208,13 @@ namespace LanGuide
         {
             if (sortResultPercentAscending)
             {
-                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultPercentAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_percent)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultPercentAscending = true;
             }
@@ -221,13 +223,13 @@ namespace LanGuide
         {
             if (sortResultScoreAscending)
             {
-                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultScoreAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_score)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultScoreAscending = true;
             }
@@ -236,13 +238,13 @@ namespace LanGuide
         {
             if (sortResultMaxAscending)
             {
-                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultMaxAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => Convert.ToInt16(result.result_max)).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortResultMaxAscending = true;
             }
@@ -251,13 +253,13 @@ namespace LanGuide
         {
             if (sortSkillAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortSkillAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortSkillAscending = true;
             }
@@ -266,13 +268,13 @@ namespace LanGuide
         {
             if (sortLanguageAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortLanguageAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortLanguageAscending = true;
             }
@@ -282,13 +284,13 @@ namespace LanGuide
         {
             if (sortDateAscending)
             {
-                var sortedResults = results.OrderByDescending(result => result.result_date).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderByDescending(result => result.result_date).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortDateAscending = false;
             }
             else
             {
-                var sortedResults = results.OrderBy(result => result.result_date).ThenBy(res => Convert.ToInt16(res.id_user)).ToList();
+                var sortedResults = results.OrderBy(result => result.result_date).ThenBy(res => Convert.ToInt16(res.id_user));
                 resultListView.ItemsSource = sortedResults;
                 sortDateAscending = true;
             }

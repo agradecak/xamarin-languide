@@ -40,21 +40,21 @@ namespace LanGuide
                     }
                 }
             }
-            var distinctLangs = languagesList.Distinct().OrderBy(lang => lang);
-            languagesListView.ItemsSource = distinctLangs;
+            var distinctLanguages = languagesList.Distinct().OrderBy(lang => lang);
+            languagesListView.ItemsSource = distinctLanguages;
         }
         private void sortLang_Tapped(object sender, EventArgs e)
         {
             if (sortLangAscending)
             {
-                var sortedResults = languagesList.Distinct().OrderByDescending(lang => lang);
-                languagesListView.ItemsSource = sortedResults;
+                var sortedLanguages = languagesList.Distinct().OrderByDescending(lang => lang);
+                languagesListView.ItemsSource = sortedLanguages;
                 sortLangAscending = false;
             }
             else
             {
-                var sortedResults = languagesList.Distinct().OrderBy(lang => lang);
-                languagesListView.ItemsSource = sortedResults;
+                var sortedLanguages = languagesList.Distinct().OrderBy(lang => lang);
+                languagesListView.ItemsSource = sortedLanguages;
                 sortLangAscending = true;
             }
         }
