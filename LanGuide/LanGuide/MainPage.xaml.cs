@@ -29,9 +29,9 @@ namespace LanGuide
                 Preferences.Set("MyFirebaseRefreshToken", serializedcontent);
                 await Navigation.PushAsync(new HomePage());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Invalid username or password", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", "Invalid email and password combination.", "OK");
             }
         }
     }

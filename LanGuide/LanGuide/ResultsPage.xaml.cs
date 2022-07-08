@@ -63,7 +63,9 @@ namespace LanGuide
                         languageList.Add(rslt.language);
                 }
             }
-            resultListView.ItemsSource = results;
+            var sortedResults = results.OrderBy(result => Convert.ToInt16(result.id_user)).ThenBy(res => res.result_date);
+            resultListView.ItemsSource = sortedResults;
+
             var lanPickerList = languageList.Distinct().OrderBy(lang => lang).ToList();
             var skillPickerList = skillList.Distinct().OrderBy(skill => skill).ToList();
             languagePicker.ItemsSource = lanPickerList;
@@ -86,22 +88,47 @@ namespace LanGuide
             var orderedResults = searchResults.OrderBy(result => result.id_exercise).ThenBy(res => Convert.ToInt16(res.id_user));
             resultListView.ItemsSource = orderedResults;
         }
-        public void languagePicker_Clicked(object sender, EventArgs e)
+        public async void languagePicker_Clicked(object sender, EventArgs e)
         {
-            string pickedLanguage = languagePicker.SelectedItem.ToString();
-            var pickedResults = results.Where(result => result.language == pickedLanguage);
-            var orderedResults = pickedResults.OrderBy(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user));
-            resultListView.ItemsSource = orderedResults;
+            
+            if (languagePicker.SelectedIndex != -1)
+            {
+                string pickedLanguage = languagePicker.SelectedItem.ToString();
+                var pickedResults = results.Where(result => result.language == pickedLanguage);
+                var orderedResults = pickedResults.OrderBy(result => result.language).ThenBy(res => Convert.ToInt16(res.id_user));
+                resultListView.ItemsSource = orderedResults;
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Picker selection can't be empty.", "OK");
+            }
         }
 
-        public void skillPicker_Clicked(object sender, EventArgs e)
+        public async void languageGraphs_Clicked(object sender, EventArgs e)
         {
-            string pickedSkill = skillPicker.SelectedItem.ToString();
-            var pickedResults = results.Where(result => result.skill == pickedSkill);
-            var orderedResults = pickedResults.OrderBy(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user));
-            resultListView.ItemsSource = orderedResults;
+            await Navigation.PushAsync(new LanguageGraphsPage());
         }
-        
+
+        public async void skillPicker_Clicked(object sender, EventArgs e)
+        {
+            if (skillPicker.SelectedIndex != -1)
+            {
+                string pickedSkill = skillPicker.SelectedItem.ToString();
+                var pickedResults = results.Where(result => result.skill == pickedSkill);
+                var orderedResults = pickedResults.OrderBy(result => result.skill).ThenBy(res => Convert.ToInt16(res.id_user));
+                resultListView.ItemsSource = orderedResults;
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Picker selection can't be empty.", "OK");
+            }
+        }
+
+        public async void skillGraphs_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SkillGraphsPage());
+        }
+
         public async void resPercentButton_Clicked(object sender, EventArgs e)
         {
             if (Convert.ToInt16(resPercentMinEntry.Text) < Convert.ToInt16(resPercentMaxEntry.Text))

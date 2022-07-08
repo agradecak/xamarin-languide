@@ -38,17 +38,17 @@ namespace LanGuide
             }
         }
 
-        private void UsersFrame_Tapped(object sender, EventArgs e)
+        private async void UsersFrame_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new UsersPage());
+           await Navigation.PushAsync(new UsersPage());
         }
         private async void ResultsFrame_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ResultsPage());
+            await Navigation.PushAsync(new ResultsPage());
         }
         private async void LanguagesFrame_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new LanguagesPage());
+            await Navigation.PushAsync(new LanguagesPage());
         }
 
         private void logoutButton_Clicked(object sender, EventArgs e)
