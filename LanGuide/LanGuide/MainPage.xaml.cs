@@ -18,6 +18,20 @@ namespace LanGuide
         {
             InitializeComponent();
         }
+        private async void signupButton_Clicked(object sender, EventArgs e)
+        {
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
+            try
+            {
+                var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(newUserEntry.Text, newPassEntry.Text);
+                string gettoken = auth.FirebaseToken;
+                await App.Current.MainPage.DisplayAlert("Alert", "Sign up process succeeded. You can now log in.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+            }
+        }
         private async void loginButton_Clicked(object sender, EventArgs e)
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
